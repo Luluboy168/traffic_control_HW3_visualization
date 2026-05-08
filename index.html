@@ -52,8 +52,17 @@
             const text = await response.text();
             const project = JSON5.parse(text);
             await Potree.loadProject(viewer, project);
-            status.textContent = `已載入 ${project.measurements.length} 條標記`;
-            setTimeout(() => status.style.display = "none", 3000);
+
+            // The saved view target was ~200m away (artifact of where measurements
+            // landed), making OrbitControls' radius-scaled pan/zoom hyper-sensitive.
+            // Rebind the orbit pivot to the scene's actual scale, and tone down rotation.
+            const bbox = viewer.getBoundingBox();
+            const sceneRadius = bbox.max.clone().sub(bbox.min).length() / 2;
+            viewer.scene.view.radius = sceneRadius;
+            viewer.controls.rotationSpeed = 1.5;
+
+            status.textContent = `已載入 ${project.measurements.length} 條標記 — 左鍵旋轉 / 右鍵平移 / 滾輪縮放`;
+            setTimeout(() => status.style.display = "none", 5000);
         } catch (err) {
             console.error(err);
             status.textContent = "載入失敗:" + err.message;
