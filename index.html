@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>路口視距 - 3D 點雲展示</title>
+
+    <link rel="stylesheet" type="text/css" href="build/potree/potree.css">
+
+    <style>
+        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        #potree_render_area { position: absolute; inset: 0; }
+        #title {
+            position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+            color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", sans-serif;
+            font-weight: 600; font-size: 14px; pointer-events: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+        }
+        #status {
+            position: absolute; bottom: 12px; left: 12px;
+            color: #aaa; font-family: monospace; font-size: 12px; pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="title">HW3 路口視距 - 街景 3D 點雲展示</div>
+    <div id="status">載入中…</div>
+
+    <script src="libs/jquery/jquery-3.1.1.min.js"></script>
+    <script src="libs/other/BinaryHeap.js"></script>
+    <script src="libs/tween/tween.min.js"></script>
+    <script src="libs/proj4/proj4.js"></script>
+    <script src="build/potree/potree.js"></script>
+
+    <div id="potree_render_area" style="background-image: url('build/potree/resources/images/background.jpg');"></div>
+
+    <script type="module">
+        import JSON5 from "./libs/json5-2.1.3/json5.mjs";
+
+        window.viewer = new Potree.Viewer(document.getElementById("potree_render_area"));
+        viewer.setEDLEnabled(true);
+        viewer.setFOV(60);
+        viewer.setPointBudget(2_000_000);
+        viewer.setMinNodeSize(0);
+        viewer.setBackground("gradient");
+        viewer.setControls(viewer.orbitControls);
+
+        const status = document.getElementById("status");
+
+        try {
+            const response = await fetch("measurements/potree.json5");
+            const text = await response.text();
+            const project = JSON5.parse(text);
+            await Potree.loadProject(viewer, project);
+            status.textContent = `已載入 ${project.measurements.length} 條標記`;
+            setTimeout(() => status.style.display = "none", 3000);
+        } catch (err) {
+            console.error(err);
+            status.textContent = "載入失敗:" + err.message;
+        }
+    </script>
+</body>
+</html>

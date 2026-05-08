@@ -1,0 +1,236 @@
+{
+	type: 'Potree',
+	version: 1.7,
+	settings: {
+		pointBudget: 2000000,
+		fov: 60,
+		edlEnabled: true,
+		edlRadius: 1.4,
+		edlStrength: 0.4,
+		background: 'gradient',
+		minNodeSize: 0,
+		showBoundingBoxes: false,
+	},
+	view: {
+		position: [
+			5.8555311727038015,
+			-14.959942394217183,
+			-15.893270315171529,
+		],
+		target: [
+			3.66854904968162,
+			-15.069350269089247,
+			-215.14950356936325,
+		],
+	},
+	classification: {
+		'0': {
+			visible: true,
+			name: 'never classified',
+			color: [
+				0.5,
+				0.5,
+				0.5,
+				1,
+			],
+		},
+		'1': {
+			visible: true,
+			name: 'unclassified',
+			color: [
+				0.5,
+				0.5,
+				0.5,
+				1,
+			],
+		},
+		'2': {
+			visible: true,
+			name: 'ground',
+			color: [
+				0.63,
+				0.32,
+				0.18,
+				1,
+			],
+		},
+		'3': {
+			visible: true,
+			name: 'low vegetation',
+			color: [
+				0,
+				1,
+				0,
+				1,
+			],
+		},
+		'4': {
+			visible: true,
+			name: 'medium vegetation',
+			color: [
+				0,
+				0.8,
+				0,
+				1,
+			],
+		},
+		'5': {
+			visible: true,
+			name: 'high vegetation',
+			color: [
+				0,
+				0.6,
+				0,
+				1,
+			],
+		},
+		'6': {
+			visible: true,
+			name: 'building',
+			color: [
+				1,
+				0.66,
+				0,
+				1,
+			],
+		},
+		'7': {
+			visible: true,
+			name: 'low point(noise)',
+			color: [
+				1,
+				0,
+				1,
+				1,
+			],
+		},
+		'8': {
+			visible: true,
+			name: 'key-point',
+			color: [
+				1,
+				0,
+				0,
+				1,
+			],
+		},
+		'9': {
+			visible: true,
+			name: 'water',
+			color: [
+				0,
+				0,
+				1,
+				1,
+			],
+		},
+		'12': {
+			visible: true,
+			name: 'overlap',
+			color: [
+				1,
+				1,
+				0,
+				1,
+			],
+		},
+		DEFAULT: {
+			visible: true,
+			name: 'default',
+			color: [
+				0.3,
+				0.6,
+				0.6,
+				0.5,
+			],
+		},
+	},
+	pointclouds: [
+		{
+			name: 'Street Scan',
+			url: 'pointclouds/street_scan/metadata.json',
+			position: [
+				-5.501450538635254,
+				-1.04611074924469,
+				-33.98060607910156,
+			],
+			rotation: [
+				1.5707963267948966,
+				0,
+				0,
+				'XYZ',
+			],
+			scale: [
+				1,
+				1,
+				1,
+			],
+			material: {
+				activeAttributeName: 'rgba',
+				ranges: [
+					{
+						name: 'elevationRange',
+						value: [
+							-33.98060607910156,
+							-5.6986060791015625,
+						],
+					},
+					{
+						name: 'intensityRange',
+						value: [
+							0,
+							0,
+						],
+					},
+				],
+				size: 1,
+				minSize: 2,
+				pointSizeType: 'ADAPTIVE',
+				matcap: 'matcap.jpg',
+			},
+		},
+	],
+	measurements: [
+		{
+			uuid: '4169EBCC-B087-484B-B3BD-25B499E127A4',
+			name: 'Distance',
+			points: [
+				[
+					6.953549488067627,
+					-12.446110947608947,
+					-33.5636060833931,
+				],
+				[
+					7.121549458742141,
+					-15.3521107558012,
+					-33.47460609674454,
+				],
+				[
+					0.5005494532585146,
+					-15.70511075592041,
+					-33.518606066703796,
+				],
+			],
+			showDistances: true,
+			showCoordinates: false,
+			showArea: false,
+			closed: false,
+			showAngles: false,
+			showHeight: false,
+			showCircle: false,
+			showAzimuth: false,
+			showEdges: true,
+			color: [
+				1,
+				0,
+				0,
+			],
+		},
+	],
+	volumes: [],
+	cameraAnimations: [],
+	profiles: [],
+	annotations: [],
+	orientedImages: [],
+	geopackages: [],
+}
